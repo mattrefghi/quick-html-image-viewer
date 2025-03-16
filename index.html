@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Image viewer">
+  <meta name="author" content="Matt Refghi">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viewer</title>
+  <style>
+    body{
+      background-color: black;
+      text-align: center;
+    }
+    
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; 
+      width: 100vw;
+      margin: 0;
+    }
+
+    .centered-image {
+      max-width: 98%;
+      max-height: 98%;
+    }
+  </style>
+  <script>
+    const KEY_ARROW_LEFT = "ArrowLeft";
+    const KEY_ARROW_RIGHT = "ArrowRight";
+    const KEY_ARROW_UP = "ArrowUp";
+    const KEY_ARROW_DOWN = "ArrowDown";
+    const EXTENSION_WEBP = ".webp";
+
+    var intCurrent = 1;
+    var intNumOfImages = 3;
+
+    window.addEventListener('keydown', function(objEvent) {
+    
+      var objImage = document.getElementById("img");
+      var objKey = event.key;
+    
+      switch (objKey) {
+        case KEY_ARROW_LEFT:
+        case KEY_ARROW_UP:
+          objEvent.preventDefault();
+
+          if(intCurrent > 1){
+            intCurrent -= 1;
+          }
+          
+          objImage.src = intCurrent + EXTENSION_WEBP;
+
+          break;
+        case KEY_ARROW_RIGHT:
+        case KEY_ARROW_DOWN:
+          objEvent.preventDefault();
+
+          if(intCurrent < intNumOfImages){
+            intCurrent += 1;
+          }
+
+          objImage.src = intCurrent + EXTENSION_WEBP;
+
+        break;
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <img id="img" src="1.webp" alt="Image" class="centered-image">
+  </div>
+</body>
+
+</html>
