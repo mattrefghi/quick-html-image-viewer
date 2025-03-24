@@ -6,4 +6,4 @@ A simple way to step through numbered .webp images using arrows keys.
   - They must be named sequentially. (1.webp, 2.webp, etc.)
 - Set a value to "intNumOfImages" (if you have 6 images, set it to 6).
 
-That's it! Use the arrow keys to navigate between images (Left and Up go backwards, Right and Down go forwards).
+That's it! Use the arrow keys to navigate between images (Left and Up go backwards, Right and Down go forwards). On mobile, tapping on the left half of the screen goes backwards, right side goes forwards.
