@@ -37,39 +37,66 @@
     const KEY_ARROW_DOWN = "ArrowDown";
     const EXTENSION_WEBP = ".webp";
 
-    var intCurrent = 1;
-    var intNumOfImages = 3;
+    let intCurrent = 1;
+    let intNumOfImages = 3;
+	let intTouchEndX = 0;
+	let intWindowWidth = 0;
+	
+	function MoveBack(){
+		let objImage = document.getElementById("img");
+
+		if(objImage){
+			if(intCurrent > 1){
+				intCurrent -= 1;
+			}
+			
+			objImage.src = intCurrent + EXTENSION_WEBP;
+		}
+	}
+	
+	function MoveForward(){
+		let objImage = document.getElementById("img");
+
+		if(objImage){
+			if(intCurrent < intNumOfImages){
+				intCurrent += 1;
+			}
+			
+			objImage.src = intCurrent + EXTENSION_WEBP;
+		}
+	}
+	
+	window.addEventListener('touchend', function (objEvent) {
+		objEvent.preventDefault();
+		intTouchEndX = objEvent.changedTouches[0].screenX;
+		intWindowWidth = window.innerWidth;
+		
+		if(intTouchEndX <= (intWindowWidth / 2)){
+			MoveBack();
+		}else{
+			MoveForward();
+		}
+	}, false);
 
     window.addEventListener('keydown', function(objEvent) {
     
-      var objImage = document.getElementById("img");
-      var objKey = event.key;
+      let objImage = document.getElementById("img");
+      let objKey = objEvent.key;
     
       switch (objKey) {
         case KEY_ARROW_LEFT:
         case KEY_ARROW_UP:
-          objEvent.preventDefault();
-
-          if(intCurrent > 1){
-            intCurrent -= 1;
-          }
-          
-          objImage.src = intCurrent + EXTENSION_WEBP;
-
-          break;
+			objEvent.preventDefault();
+			MoveBack();
+			break;
+			
         case KEY_ARROW_RIGHT:
         case KEY_ARROW_DOWN:
-          objEvent.preventDefault();
-
-          if(intCurrent < intNumOfImages){
-            intCurrent += 1;
-          }
-
-          objImage.src = intCurrent + EXTENSION_WEBP;
-
-        break;
+			objEvent.preventDefault();
+			MoveForward();
+			break;		
       }
-    });
+    }, false);
   </script>
 </head>
 <body>
